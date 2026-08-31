@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"
+    />
+    <title>시애틀 스톰호크스 로어북</title>
+    <style>
+      :root {
+        --bg: #f4fbff;
+        --bg2: #eaf7ff;
+        --ink: #173044;
+        --dim: #688093;
+        --muted: #91a6b4;
+        --card: rgba(255, 255, 255, 0.72);
+        --line: rgba(44, 126, 164, 0.18);
+        --blue: #3e9fc4;
+        --sky: #75cbe4;
+        --mint: #7ccdb4;
+        --yellow: #f2c96d;
+        --navy: #193c59;
+        --silver: #9db0bd;
+        --shadow: rgba(34, 83, 107, 0.15);
+        --accent: #3e9fc4;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          sans-serif;
+        background: linear-gradient(
+          145deg,
+          #fbfeff 0%,
+          #edf9ff 45%,
+          #f2fbf6 100%
+        );
+        color: var(--ink);
+        line-height: 1.65;
+      }
+      body:before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -5;
+        background:
+          radial-gradient(
+            circle at 12% 7%,
+            rgba(117, 203, 228, 0.3),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 90% 18%,
+            rgba(124, 205, 180, 0.22),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 55% 92%,
+            rgba(242, 201, 109, 0.2),
+            transparent 32%
+          );
+      }
+      body:after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -4;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(62, 159, 196, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(62, 159, 196, 0.028) 1px, transparent 1px);
+        background-size: 30px 30px;
+        mask-image: linear-gradient(#000, transparent 92%);
+      }
+      #particles {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: -2;
+      }
+      .p {
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(117, 203, 228, 0.38);
+        animation: drift linear infinite;
+      }
+      .p:nth-child(3n) {
+        background: rgba(124, 205, 180, 0.36);
+      }
+      .p:nth-child(4n) {
+        width: 3px;
+        height: 22px;
+        background: rgba(242, 201, 109, 0.35);
+        border-radius: 99px;
+      }
+      @keyframes drift {
+        from {
+          transform: translate3d(0, 105vh, 0);
+        }
+        to {
+          transform: translate3d(var(--x), -12vh, 0);
+        }
+      }
+      @keyframes float {
+        50% {
+          transform: translateY(-8px) rotate(-1deg);
+        }
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes pulse {
+        50% {
+          transform: scaleX(0.78);
+          opacity: 0.45;
+        }
+      }
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: linear-gradient(
+          150deg,
+          rgba(250, 254, 255, 0.94),
+          rgba(232, 248, 255, 0.93)
+        );
+        backdrop-filter: blur(16px);
+        transition: 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      #splash.hide {
+        opacity: 0;
+        pointer-events: none;
+        filter: blur(10px);
+        transform: scale(1.02);
+      }
+      .gate {
+        width: min(455px, 100%);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 34px;
+        padding: 30px 21px 25px;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.78),
+          rgba(236, 249, 255, 0.55)
+        );
+        box-shadow:
+          0 30px 80px var(--shadow),
+          inset 0 1px 0 white;
+        backdrop-filter: blur(22px);
+      }
+      .gate:before {
+        content: "";
+        position: absolute;
+        inset: -45%;
+        background: conic-gradient(
+          from 90deg,
+          transparent,
+          rgba(117, 203, 228, 0.18),
+          transparent,
+          rgba(124, 205, 180, 0.16),
+          transparent
+        );
+        animation: spin 15s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .gate > * {
+        position: relative;
+      }
+      .icon {
+        width: 98px;
+        height: 98px;
+        margin: 0 auto 17px;
+        border-radius: 30px;
+        display: grid;
+        place-items: center;
+        font-size: 45px;
+        background: linear-gradient(145deg, #fff, #e7f8ff);
+        border: 1px solid rgba(62, 159, 196, 0.2);
+        box-shadow: 0 18px 42px rgba(62, 159, 196, 0.18);
+        animation: float 4.2s ease-in-out infinite;
+      }
+      .kicker {
+        font-size: 10px;
+        letter-spacing: 0.28em;
+        color: var(--blue);
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(29px, 8vw, 42px);
+        line-height: 1.08;
+        letter-spacing: -0.055em;
+        margin: 11px 0 7px;
+      }
+      .subtitle {
+        font-family: Georgia, serif;
+        font-style: italic;
+        color: #668494;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+      }
+      .notice {
+        margin: 20px 0 17px;
+        text-align: left;
+        padding: 15px 16px;
+        border: 1px solid var(--line);
+        border-radius: 21px;
+        background: rgba(255, 255, 255, 0.55);
+        color: #5e7482;
+        font-size: 13px;
+        line-height: 1.82;
+      }
+      .enter {
+        width: 100%;
+        border: 0;
+        border-radius: 18px;
+        padding: 16px;
+        background: linear-gradient(
+          100deg,
+          var(--blue),
+          var(--sky) 52%,
+          var(--mint)
+        );
+        color: #fff;
+        font-weight: 950;
+        letter-spacing: 0.18em;
+        box-shadow: 0 15px 35px rgba(62, 159, 196, 0.2);
+        cursor: pointer;
+      }
+      #app {
+        display: none;
+        min-height: 100vh;
+        padding-bottom: 34px;
+      }
+      #app.show {
+        display: block;
+        animation: fadeUp 0.55s ease both;
+      }
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        padding: 11px 14px env(safe-area-inset-top);
+        background: rgba(249, 253, 255, 0.76);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(62, 159, 196, 0.13);
+      }
+      .toprow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo {
+        width: 43px;
+        height: 43px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(145deg, #fff, #e7f8ff);
+        border: 1px solid var(--line);
+        box-shadow: 0 10px 24px rgba(62, 159, 196, 0.12);
+        font-size: 21px;
+        color: var(--navy);
+      }
+      .titles {
+        flex: 1;
+        min-width: 0;
+      }
+      .title {
+        font-size: 16px;
+        font-weight: 950;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        letter-spacing: -0.03em;
+      }
+      .state {
+        font-size: 10px;
+        color: var(--blue);
+        letter-spacing: 0.13em;
+        font-weight: 800;
+      }
+      .mainbtn {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.65);
+        color: var(--navy);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 11px;
+        font-weight: 950;
+        letter-spacing: 0.1em;
+      }
+      .hero {
+        padding: 15px 14px 9px;
+        max-width: 1120px;
+        margin: auto;
+      }
+      .heroPanel {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 28px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.78),
+          rgba(232, 248, 255, 0.54)
+        );
+        box-shadow: 0 18px 50px rgba(47, 100, 124, 0.12);
+        padding: 19px;
+      }
+      .heroPanel:after {
+        content: "";
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        bottom: 13px;
+        height: 3px;
+        border-radius: 99px;
+        background: linear-gradient(
+          90deg,
+          var(--navy),
+          var(--blue),
+          var(--mint),
+          var(--yellow)
+        );
+        transform-origin: left;
+        animation: pulse 3.6s ease-in-out infinite;
+      }
+      .big {
+        font-size: 24px;
+        font-weight: 950;
+        letter-spacing: -0.05em;
+        line-height: 1.25;
+      }
+      .desc {
+        margin-top: 7px;
+        color: #647b89;
+        font-size: 13px;
+      }
+      .controls {
+        padding: 0 14px 12px;
+        max-width: 1120px;
+        margin: auto;
+      }
+      .tabs,
+      .filters {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 5px 0;
+      }
+      .tabs::-webkit-scrollbar,
+      .filters::-webkit-scrollbar {
+        display: none;
+      }
+      .tab,
+      .kw {
+        white-space: nowrap;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.62);
+        color: #6b818f;
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 12px;
+        box-shadow: 0 6px 16px rgba(47, 100, 124, 0.05);
+      }
+      .tab.active,
+      .kw.active {
+        color: #fff;
+        border-color: transparent;
+        background: linear-gradient(100deg, var(--navy), var(--blue));
+        font-weight: 900;
+      }
+      .search {
+        position: relative;
+        margin: 9px 0;
+      }
+      .search input {
+        width: 100%;
+        border: 1px solid var(--line);
+        outline: 0;
+        border-radius: 19px;
+        background: rgba(255, 255, 255, 0.75);
+        padding: 14px 16px 14px 42px;
+        color: var(--ink);
+        font-size: 14px;
+        box-shadow: inset 0 1px 0 #fff;
+      }
+      .search i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-style: normal;
+        color: var(--blue);
+      }
+      .count {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.13em;
+        margin: 6px 2px;
+        font-weight: 850;
+      }
+      .selectbar {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin: 8px 0 3px;
+        padding: 9px 11px;
+        border: 1px solid var(--line);
+        border-radius: 17px;
+        background: rgba(255, 255, 255, 0.58);
+        box-shadow: 0 8px 20px rgba(47, 100, 124, 0.05);
+      }
+      .selectbar label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 850;
+        color: #5f7785;
+        flex: 1;
+      }
+      .selectbar input {
+        accent-color: var(--blue);
+        width: 17px;
+        height: 17px;
+      }
+      .batch {
+        border: 1px solid rgba(62, 159, 196, 0.25);
+        background: linear-gradient(100deg, #fff, #edfaff);
+        color: var(--navy);
+        border-radius: 12px;
+        padding: 8px 10px;
+        font-size: 11px;
+        font-weight: 900;
+      }
+      .batch:disabled {
+        opacity: 0.45;
+      }
+      #list {
+        max-width: 1120px;
+        margin: auto;
+        padding: 0 14px;
+        display: grid;
+        gap: 14px;
+      }
+      .card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        background: linear-gradient(
+          150deg,
+          rgba(255, 255, 255, 0.82),
+          rgba(240, 250, 255, 0.55)
+        );
+        border-radius: 28px;
+        box-shadow: 0 19px 43px rgba(47, 100, 124, 0.13);
+        animation: fadeUp 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .card.selected {
+        border-color: rgba(62, 159, 196, 0.5);
+        box-shadow:
+          0 19px 43px rgba(47, 100, 124, 0.13),
+          0 0 0 2px rgba(62, 159, 196, 0.1);
+      }
+      .chead {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 14px 15px;
+        border-bottom: 1px solid rgba(62, 159, 196, 0.11);
+      }
+      .check {
+        width: 19px;
+        height: 19px;
+        margin-top: 5px;
+        accent-color: var(--blue);
+        flex: none;
+      }
+      .badge {
+        min-width: 60px;
+        border: 1px solid rgba(62, 159, 196, 0.2);
+        border-radius: 16px;
+        padding: 9px 7px;
+        text-align: center;
+        background: linear-gradient(145deg, #fff, #e9f8ff);
+        color: var(--navy);
+        font-size: 10px;
+        font-weight: 950;
+        letter-spacing: 0.06em;
+      }
+      .meta {
+        flex: 1;
+        min-width: 0;
+      }
+      .ctitle {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: 950;
+        letter-spacing: -0.04em;
+        cursor: pointer;
+        padding: 3px 4px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+      .cat {
+        font-size: 11px;
+        color: var(--blue);
+        font-weight: 850;
+        margin-top: 2px;
+      }
+      .copyall {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(62, 159, 196, 0.22);
+        background: rgba(255, 255, 255, 0.62);
+        color: var(--navy);
+        border-radius: 13px;
+        padding: 8px 9px;
+        font-size: 11px;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+      .tags {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        padding: 12px 15px;
+        border-bottom: 1px solid rgba(62, 159, 196, 0.09);
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .tag {
+        font-size: 11px;
+        color: #34768f;
+        background: rgba(117, 203, 228, 0.12);
+        border: 1px solid rgba(62, 159, 196, 0.16);
+        border-radius: 999px;
+        padding: 5px 9px;
+        font-weight: 800;
+      }
+      .body {
+        position: relative;
+        padding: 15px 15px 17px;
+        color: #3f5665;
+        font-size: 14px;
+        line-height: 1.92;
+        cursor: pointer;
+        white-space: pre-wrap;
+        overflow: hidden;
+        border: 1px solid transparent;
+        border-radius: 0 0 27px 27px;
+      }
+      .card.collapsed .body {
+        display: none;
+      }
+      .toggle {
+        width: 100%;
+        border: 0;
+        border-top: 1px solid rgba(62, 159, 196, 0.09);
+        background: rgba(255, 255, 255, 0.28);
+        color: #758b98;
+        padding: 10px;
+        font-size: 11px;
+        font-weight: 850;
+      }
+      .copyfx {
+        animation: borderGlow 2.15s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .copyfx:after {
+        content: "";
+        position: absolute;
+        inset: -28%;
+        background: linear-gradient(
+          110deg,
+          transparent 26%,
+          rgba(255, 255, 255, 0.1) 39%,
+          rgba(255, 255, 255, 0.85) 50%,
+          rgba(255, 255, 255, 0.16) 61%,
+          transparent 75%
+        );
+        transform: translateX(-90%) rotate(5deg);
+        animation: glass 2.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        pointer-events: none;
+      }
+      @keyframes glass {
+        to {
+          transform: translateX(90%) rotate(5deg);
+        }
+      }
+      @keyframes borderGlow {
+        0% {
+          border-color: rgba(62, 159, 196, 0);
+          box-shadow: inset 0 0 0 rgba(62, 159, 196, 0);
+        }
+        35% {
+          border-color: rgba(62, 159, 196, 0.85);
+          box-shadow:
+            inset 0 0 24px rgba(62, 159, 196, 0.12),
+            0 0 18px rgba(62, 159, 196, 0.1);
+        }
+        100% {
+          border-color: rgba(62, 159, 196, 0);
+          box-shadow: inset 0 0 0 rgba(62, 159, 196, 0);
+        }
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        z-index: 60;
+        transform: translateX(-50%) translateY(14px);
+        opacity: 0;
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(62, 159, 196, 0.25);
+        color: var(--navy);
+        border-radius: 999px;
+        padding: 11px 18px;
+        font-size: 13px;
+        font-weight: 900;
+        box-shadow: 0 16px 38px rgba(47, 100, 124, 0.18);
+        transition: 0.25s;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      @media (min-width: 760px) {
+        #list {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles"></div>
+    <section id="splash">
+      <div class="gate">
+        <div class="icon">🏈</div>
+        <div class="kicker">Seattle Stormhawks · Football Archive</div>
+        <h1>시애틀<br />스톰호크스</h1>
+        <div class="subtitle">Fresh Season Fieldbook</div>
+        <div class="notice">
+          시애틀 스톰호크스와 {char}, {user}를 둘러싼 팀·경기·생활·항공 기록을
+          산뜻한 풋볼 아카이브로 정리했습니다.<br /><br />제목·키워드·내용은
+          터치하여 복사할 수 있습니다.
+        </div>
+        <button class="enter" id="enterBtn">열람 승인</button>
+      </div>
+    </section>
+    <main id="app">
+      <header class="top">
+        <div class="toprow">
+          <div class="logo">🏈</div>
+          <div class="titles">
+            <div class="title">시애틀 스톰호크스</div>
+            <div class="state">ACTIVE · SEASON FIELD ARCHIVE</div>
+          </div>
+          <button class="mainbtn" id="mainBtn">MAIN</button>
+        </div>
+      </header>
+      <section class="hero">
+        <div class="heroPanel">
+          <div class="big">푸른 하늘 아래, 오늘도 필드가 먼저 뛴다.</div>
+          <p class="desc">
+            팀의 뜨거운 경기일과 집에서의 느긋한 일상을 한 권의 모바일
+            필드북처럼 열람하세요.
+          </p>
+        </div>
+      </section>
+      <section class="controls">
+        <nav class="tabs" id="tabs"></nav>
+        <div class="search">
+          <i>⌕</i><input id="search" placeholder="제목, 키워드, 내용 검색" />
+        </div>
+        <div class="filters" id="filters"></div>
+        <div class="count" id="count"></div>
+        <div class="selectbar">
+          <label
+            ><input type="checkbox" id="selectAll" /> 현재 표시 항목 전체선택 /
+            해제</label
+          ><button class="batch" id="batch" disabled>
+            선택 항목 일괄 복사
+          </button>
+        </div>
+      </section>
+      <section id="list"></section>
+    </main>
+    <div class="toast" id="toast">복사 완료</div>
+    <script>
+      const DATA = [
+        {
+          title: "시애틀 스톰호크스",
+          section: "시애틀 스톰호크스",
+          keywords: ["팀", "소속팀", "구단", "스톰호크스"],
+          content:
+            "{{char}}가 소속된 프로 미식축구팀이다. 미국 서부 시애틀을 연고로 하는 NFC 소속 구단이며, 팀 컬러는 네이비와 실버, 마스코트는 매(호크)다. 창단 30년이 넘은 중견 구단으로 지역 팬들의 충성도가 높고, 도시 전체가 경기 날이면 팀 컬러 옷을 입고 나올 정도로 생활 깊숙이 자리 잡은 존재다.",
+          code: "LORE-01",
+        },
+        {
+          title: "팀 평판",
+          section: "시애틀 스톰호크스",
+          keywords: ["평판", "성적", "명성", "순위"],
+          content:
+            '지상 공격 중심의 우직한 전술로 유명하며, {{char}}의 합류 이후 러싱 야드 순위가 리그 상위권으로 뛰어올랐다는 평가를 받는다. 최근 몇 시즌 연속 플레이오프에 진출하며 강팀 반열에 올랐지만, 정작 중요한 순간마다 우승 문턱에서 좌절해 "만년 2인자"라는 꼬리표가 늘 따라붙는다.',
+          code: "LORE-02",
+        },
+        {
+          title: "루멘 필드",
+          section: "시애틀 스톰호크스",
+          keywords: ["홈구장", "경기장", "스타디움", "홈경기"],
+          content:
+            "스톰호크스의 홈구장이다. 6만 8천석 규모로 시애틀 도심 바닷가 근처에 위치하며, 관중석이 필드와 매우 가깝게 설계돼 있어 리그에서 손꼽히는 함성 데시벨을 자랑한다. 원정팀 선수들이 작전 지시를 못 들을 정도로 시끄러운 걸로 악명이 높으며, 이 때문에 홈 경기 승률이 유독 높은 구장으로도 유명하다. 경기가 없는 날에도 관광 명소처럼 알려져 있어, {{char}}이 {{user}}와 몰래 데이트를 즐기는 장소 중 하나다.",
+          code: "LORE-03",
+        },
+        {
+          title: "라이벌 구단 — 포틀랜드 팬서스",
+          section: "시애틀 스톰호크스",
+          keywords: ["라이벌", "라이벌전", "디비전 경쟁"],
+          content:
+            '같은 디비전 소속의 오랜 라이벌 팀이다. 매 시즌 두 차례 맞붙으며, 이 경기만큼은 티켓이 항상 매진되고 지역 언론에서도 다른 경기보다 훨씬 크게 다루는 빅매치로 취급된다. {{char}}는 이 라이벌전에서 유독 몸을 사리지 않고 거칠게 부딪히는 플레이로 유명해 팬서스 팬들 사이에서는 밉상으로, 스톰호크스 팬들 사이에서는 영웅으로 불리며 "팬서스 킬러"라는 별명을 얻었다.',
+          code: "LORE-04",
+        },
+        {
+          title: "{{char}}의 팀 내 위상",
+          section: "시애틀 스톰호크스",
+          keywords: ["러닝백", "주전", "등번호", "에이스"],
+          content:
+            "팀의 주전 러닝백이자 공격의 핵심 축이다. 한국인 선수로는 드물게 주전 자리를 꿰차 화제가 됐으며, 압도적인 피지컬과 저돌적인 플레이 스타일로 팀의 상징 같은 존재가 됐다. 코칭스태프와 동료들 사이에서는 실력만큼은 누구도 의심하지 않지만, 경기 중 다혈질 기질 때문에 벤치에서 진정시켜야 할 때가 잦은 골칫거리이기도 하다. 언론 앞에서는 실언이 잦아 구단 홍보팀이 은근히 신경 쓰는 선수이기도 하다.",
+          code: "LORE-05",
+        },
+        {
+          title: "훈련 시설 — 스톰 퍼포먼스 센터",
+          section: "시애틀 스톰호크스",
+          keywords: [
+            "루멘 필드와는 별도로 시 외곽에 위치한 팀 전용 훈련 시설이다. 최신 웨이트 트레이닝 장비와 회복 시설(냉수욕조",
+            "물리치료실 등)을 갖추고 있으며",
+            "오프시즌에도 개인 훈련을 위해 이곳을 찾는 선수가 많다.",
+          ],
+          content: "",
+          code: "LORE-06",
+        },
+        {
+          title: "감독 — 프랭크 도슨",
+          section: "시애틀 스톰호크스",
+          keywords: ["감독", "헤드코치", "코칭스태프"],
+          content:
+            "스톰호크스의 헤드코치다. 60대 초반의 베테랑 지도자로, 선수 시절엔 무명이었지만 지도자로 전향한 뒤 두 팀의 리빌딩을 성공시킨 경력이 있다. 겉으로는 무뚝뚝하고 잔소리가 많지만 선수 개개인의 컨디션과 사정을 세심하게 챙기는 스타일로 알려져 있다. {{char}}를 영입할 때 직접 한국까지 스카우팅을 왔던 인연이 있어 각별히 신경 쓰며, {{char}}의 다혈질 기질과 잦은 부상을 걱정하면서도 그 저돌적인 플레이만큼은 늘 신뢰하는 편이다.",
+          code: "LORE-07",
+        },
+        {
+          title: "라커룸 분위기",
+          section: "시애틀 스톰호크스",
+          keywords: ["라커룸", "팀동료", "동료선수", "팀워크"],
+          content:
+            "스톰호크스 라커룸은 텃세보다는 화기애애한 분위기로 유명하다. 신인이든 베테랑이든 실력만 보여주면 금방 녹아드는 편이며, {{char}}는 언어 장벽 때문에 초반엔 겉돌았지만 압도적인 실력과 특유의 텐션으로 금세 라커룸의 중심 멤버가 됐다. 동료들은 그를 든든한 에이스이자 종종 사고를 치는 골칫덩이로 동시에 여기며, {{user}} 이야기만 나오면 갑자기 얌전해지는 모습을 두고두고 놀리는 게 라커룸의 단골 소재다.",
+          code: "LORE-08",
+        },
+        {
+          title: "쿼터백 — 타일러 브룩스",
+          section: "시애틀 스톰호크스",
+          keywords: ["쿼터백", "QB", "팀동료"],
+          content:
+            "팀의 주전 쿼터백이자 {{char}}와 가장 합이 좋은 동료다. 밝고 장난기 많은 성격으로 라커룸 분위기 메이커 역할을 하며, {{char}}와는 필드 위에서도 눈빛만으로 통하는 환상의 호흡을 자랑한다. 훈련장 밖에서도 종종 어울리는 사이로, {{char}}가 {{user}} 앞에서 얌전해지는 걸 가장 잘 아는 인물이자 가장 많이 놀리는 인물이기도 하다.",
+          code: "LORE-09",
+        },
+        {
+          title: "휴식기",
+          section: "시애틀 스톰호크스",
+          keywords: ["휴식기", "시즌오프", "2월"],
+          content:
+            "매년 2~3월, 시즌이 끝난 직후 주어지는 가장 긴 개인 시간이다. 훈련 부담이 거의 없어 한국에 다녀오거나 {{user}}와 여유롭게 시간을 보낸다.",
+          code: "LORE-10",
+        },
+        {
+          title: "프리시즌 캠프",
+          section: "시애틀 스톰호크스",
+          keywords: ["전지훈련", "캠프", "합숙", "프리시즌"],
+          content:
+            "7월 말부터 8월까지 진행되는 본격적인 팀 훈련 캠프다. 숙소 생활을 하며 하루 종일 훈련에 매달려 개인 연락이 뜸해진다. 프리시즌 연습경기도 이 기간에 3\\~4차례 열린다.",
+          code: "LORE-11",
+        },
+        {
+          title: "플레이오프",
+          section: "시애틀 스톰호크스",
+          keywords: ["플레이오프"],
+          content:
+            "1월 중순부터 2월 초까지 정규시즌 성적이 좋은 팀만 진출하는 토너먼트다. 이 기간까지 뛴다는 건 팀 성적이 좋다는 뜻이며 언론 노출과 부담감이 최고조에 달한다.",
+          code: "LORE-12",
+        },
+        {
+          title: "정규시즌",
+          section: "시애틀 스톰호크스",
+          keywords: ["시즌", "정규시즌", "경기", "시즌중"],
+          content:
+            "9월부터 다음 해 1월 초까지 이어지는 본 시즌이다. 매주 일요일(가끔 목·월요일)마다 경기가 있으며, 경기 전날은 팀 호텔에 격리되고 경기 다음 날은 온몸이 근육통으로 뻗어있을 정도로 체력적으로 지친다. 몸은 만신창이가 돼도 텐션 자체는 크게 죽지 않는 편이라, 파스 냄새를 풍기면서도 {{user}} 앞에서는 여전히 시끄럽게 굴며 어리광을 부린다. 다만 팀이 크게 진 날만큼은 예외로, 평소와 달리 말수가 눈에 띄게 줄어든다.",
+          code: "LORE-13",
+        },
+        {
+          title: "바이위크",
+          section: "시애틀 스톰호크스",
+          keywords: ["바이위크", "휴식주", "중간휴식"],
+          content:
+            "정규시즌 중간에 한 번 껴 있는 완전 휴식 주간이다. 경기 없이 온전히 쉴 수 있다.",
+          code: "LORE-14",
+        },
+        {
+          title: "아메리칸 풋볼 리그 (AFL)",
+          section: "시애틀 스톰호크스",
+          keywords: ["리그", "AFL", "프로리그"],
+          content:
+            "{{char}}가 뛰고 있는 미국 프로 미식축구 리그다. 미국 전역의 프랜차이즈 팀들이 소속돼 있으며, 매년 9월부터 이듬해 2월까지 시즌이 진행된다. 미국에서 가장 인기 있는 스포츠 리그 중 하나로, 정규시즌 경기는 물론 챔피언 결정전(슈퍼볼급 이벤트)은 전 국민이 주목하는 초대형 행사로 취급된다. 스타 선수들은 경기력만큼이나 사생활·연애사까지 대중과 언론의 관심 대상이 되는 경우가 많다.",
+          code: "LORE-15",
+        },
+        {
+          title: "기자회견",
+          section: "시애틀 스톰호크스",
+          keywords: ["기자회견", "인터뷰", "언론", "미디어데이"],
+          content:
+            "경기 전후로 선수들이 언론과 마주하는 공식 자리다. 감독과 주요 선수들이 돌아가며 참석하며, 그날 경기 내용이나 컨디션에 대한 질문이 오간다. {{char}}는 실력 덕분에 자주 마이크 앞에 서지만, 다혈질에 필터 없는 화법 탓에 종종 논란이 될 만한 발언을 해 다음 날 스포츠 뉴스 헤드라인을 장식하곤 한다. 구단 홍보팀이 인터뷰 전 미리 신신당부를 해도 실전에서는 잘 지켜지지 않는 편이다.",
+          code: "LORE-16",
+        },
+        {
+          title: "데일리 그리디언",
+          section: "시애틀 스톰호크스",
+          keywords: ["기사", "뉴스", "스포츠뉴스", "데일리그리디언"],
+          content:
+            'AFL 관련 소식을 전문으로 다루는 스포츠 매체다. 경기 분석부터 선수 개인사, 열애설까지 폭넓게 다뤄 선수들 사이에서는 껄끄러운 존재로 통한다. {{char}}의 인터뷰 발언 논란이나 특종성 기사는 대개 이곳에서 가장 먼저 터진다. 기자들의 취재 열의가 유독 강한 매체로 알려져 있으며, 라커룸 안에서도 "그리디언 기자는 조심하라"는 말이 나올 정도로 선수단 사이에서 경계 대상이다.',
+          code: "LORE-17",
+        },
+        {
+          title: "호크스톡",
+          section: "시애틀 스톰호크스",
+          keywords: ["커뮤니티", "팬카페", "게시판", "여론"],
+          content:
+            "스톰호크스 팬들이 모이는 온라인 커뮤니티다. 경기 직후 실시간 반응부터 선수 개개인에 대한 평가, 열애설이나 사생활 루머까지 실시간으로 쏟아진다. {{char}}에 대한 여론은 실력 면에서는 절대적인 지지를 받지만, 다혈질 플레이나 인터뷰 실언이 나올 때마다 게시판이 시끄러워지며 옹호파와 비판파로 나뉘어 논쟁이 벌어진다.",
+          code: "LORE-18",
+        },
+        {
+          title: "SPN(스포츠 프라임 네트워크)",
+          section: "시애틀 스톰호크스",
+          keywords: ["방송", "중계", "스포츠채널"],
+          content:
+            "AFL 경기를 전국 중계하는 대표 방송사다. 경기 중계뿐 아니라 시즌 하이라이트, 선수 다큐멘터리, 사전 분석 프로그램까지 제작한다. 화제성 있는 선수는 시즌 중 특집 인터뷰나 다큐멘터리 촬영 대상으로 종종 섭외되며, {{char}} 역시 압도적인 피지컬과 파격적인 플레이 스타일 덕에 여러 차례 카메라 앞에 선 이력이 있다.",
+          code: "LORE-19",
+        },
+        {
+          title: "머서 아일랜드",
+          section: "주거",
+          keywords: ["집", "거주지", "동네", "머서 아일랜드"],
+          content:
+            "{{char}}와 {{user}}가 함께 살고 있는 동네다. 시애틀 도심에서 다리 하나만 건너면 닿는 호수 위 섬으로, 루멘 필드까지는 차로 20분 남짓이라 통근 부담이 적다. 부유층과 유명인들이 사생활 보호를 위해 많이 거주하는 조용한 주택가로 알려져 있으며, 기자나 팬들의 접근이 상대적으로 적어 운동선수들이 선호하는 동네다. 집 근처에는 호수를 따라 이어지는 산책로가 있어 {{char}}가 컨디션 조절 삼아 가볍게 뛰거나 {{user}}와 함께 산책하기 좋다. 동네 전체가 한적하고 나무가 많아 도심과는 전혀 다른 분위기를 풍긴다.",
+          code: "HOME-01",
+        },
+        {
+          title: "집",
+          section: "주거",
+          keywords: ["집", "자택", "거주지", "우리집"],
+          content:
+            "머서 아일랜드 호숫가 근처에 위치한 단독주택이다. 2층 구조에 넓은 마당이 딸려 있으며, 거리에서 집이 잘 보이지 않도록 나무와 담장으로 둘러싸여 있어 사생활 보호에 신경 쓴 구조다. 지하에는 {{char}}가 개인 훈련을 할 수 있는 홈짐과 회복용 냉수욕조가 갖춰져 있어, 시즌 중 늦은 밤에도 혼자 몸을 관리하는 공간으로 쓰인다. 거실은 큰 통유리창 너머로 호수가 내다보이는 구조로, 두 사람이 가장 많은 시간을 보내는 공간이다. 원래 {{char}} 혼자 살던 집이었으나 {{user}}와 동거를 시작하며 인테리어 곳곳에 그녀의 취향이 스며들었다.",
+          code: "HOME-02",
+        },
+        {
+          title: "{{char}}의 차",
+          section: "주거",
+          keywords: ["차", "자동차"],
+          content:
+            "{{char}}가 타고 다니는 차량이다. 검은색 대형 SUV로, 190cm가 넘는 체격에도 불편함 없이 탈 수 있는 넉넉한 실내 공간이 첫 번째 조건이었다. 워낙 덩치가 크다 보니 일반 세단은 타기 불편해했고, 결국 힘과 크기를 중시해 고른 차다. 운전 스타일은 다소 거칠고 급한 편이라 {{user}}가 종종 잔소리를 하는 포인트이기도 하다. 차 안에는 훈련 가방이나 보호대 같은 운동 관련 짐이 항상 실려 있다.",
+          code: "HOME-03",
+        },
+        {
+          title: "{{char}}의 시즌 중 일과",
+          section: "주거",
+          keywords: ["하루일과", "루틴", "스케줄", "일상"],
+          content:
+            "정규시즌 기간 동안의 전형적인 하루다. 새벽같이 일어나 스톰 퍼포먼스 센터로 출근해 오전 내내 웨이트 트레이닝과 전술 미팅을 소화한다. 점심은 구단에서 제공하는 식단으로 간단히 해결하고, 오후에는 필드 훈련과 영상 분석 시간을 갖는다. 훈련이 끝나면 부상 부위 관리를 위해 물리치료실에 들르는 게 일상이며, 저녁 늦게야 집에 돌아온다. 집에 돌아오면 녹초가 되어 있지만 {{user}}가 있으면 없던 기운도 생긴다며 유독 말이 많아진다",
+          code: "HOME-04",
+        },
+
+        {
+          title: "시애틀-타코마 국제공항 (SEA-TAC)",
+          section: "퍼시픽 에어웨이",
+          keywords: ["공항", "시택공항", "출근", "비행"],
+          content:
+            "{{user}}가 근무하는 공항이다. 퍼시픽 에어웨이의 주요 허브 중 하나로, 미주-아시아 노선이 많이 몰려 있어 장거리 비행 스케줄이 잦은 편이다. {{char}}의 집(머서 아일랜드)에서 차로 30분 남짓 거리라, 두 사람이 같은 도시를 기반으로 지내면서도 스케줄이 자주 엇갈리는 구조를 자연스럽게 만들어준다. {{user}}가 장거리 비행을 마치고 돌아오는 날이면 {{char}}가 종종 공항으로 마중을 나가기도 한다.",
+          code: "AIR-01",
+        },
+        {
+          title: "{{user}}의 직업 — 승무원",
+          section: "퍼시픽 에어웨이",
+          keywords: ["승무원", "직업", "항공사", "비행"],
+          content:
+            "{{user}}의 직업이다. 미국 항공사 소속의 한국인 승무원으로, 주로 미주-아시아 노선을 담당한다. 유창한 영어와 한국어를 모두 구사할 수 있어 한국행 노선에 자주 배정되며, 승객 응대 능력이 뛰어나 동료들 사이에서도 신뢰받는 편이다.",
+          code: "AIR-02",
+        },
+        {
+          title: "비행 스케줄",
+          section: "퍼시픽 에어웨이",
+          keywords: ["스케줄", "비행일정", "레이오버", "근무패턴"],
+          content:
+            "{{user}}의 근무는 정해진 출퇴근이 아니라 한 달 단위로 짜이는 비행 스케줄에 따라 움직인다. 장거리 노선일 경우 며칠씩 집을 비우는 일이 흔하고, 시차 때문에 며칠간 컨디션이 안 좋은 채로 지내기도 한다. 레이오버(경유지 체류) 기간에는 해외에 머물며 짧은 휴식을 취하는데, 이 기간 동안 {{char}}와 시차 때문에 통화 타이밍이 어긋나기도 한다. {{char}}의 시즌 스케줄과 {{user}}의 비행 스케줄이 맞물려 둘 다 바쁠 때는 몇 주씩 얼굴을 못 보는 시기도 있다.",
+          code: "AIR-03",
+        },
+      ];
+      const $ = (id) => document.getElementById(id);
+      const splash = $("splash"),
+        app = $("app"),
+        list = $("list"),
+        tabs = $("tabs"),
+        filters = $("filters"),
+        search = $("search"),
+        count = $("count"),
+        selectAll = $("selectAll"),
+        batch = $("batch"),
+        toast = $("toast");
+      let cat = "전체",
+        kw = "전체",
+        selected = new Set(),
+        collapsed = new Set();
+
+      function fallbackCopy(text) {
+        try {
+          if (navigator.clipboard && window.isSecureContext)
+            return navigator.clipboard.writeText(text);
+        } catch (e) {}
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        let ok = false;
+        try {
+          ok = document.execCommand("copy");
+        } catch (e) {}
+        ta.remove();
+        return Promise.resolve(ok);
+      }
+      function toastMsg(t) {
+        toast.textContent = t;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 1700);
+      }
+      function fx(el) {
+        if (!el) return;
+        el.classList.remove("copyfx");
+        void el.offsetWidth;
+        el.classList.add("copyfx");
+        setTimeout(() => el.classList.remove("copyfx"), 2250);
+      }
+      function copyText(text, el, msg = "복사 완료") {
+        fallbackCopy(text).then(() => {
+          fx(el);
+          toastMsg(msg);
+        });
+      }
+      function filtered() {
+        const q = search.value.trim().toLowerCase();
+        return DATA.filter(
+          (e) =>
+            (cat === "전체" || e.section === cat) &&
+            (kw === "전체" || e.keywords.includes(kw)) &&
+            (!q ||
+              (e.title + " " + e.keywords.join(" ") + " " + e.content)
+                .toLowerCase()
+                .includes(q)),
+        );
+      }
+      function renderTabs() {
+        const cats = ["전체", ...new Set(DATA.map((e) => e.section))];
+        tabs.innerHTML = cats
+          .map(
+            (x) =>
+              `<button class="tab ${x === cat ? "active" : ""}">${x}</button>`,
+          )
+          .join("");
+        tabs.querySelectorAll(".tab").forEach(
+          (b) =>
+            (b.onclick = () => {
+              cat = b.textContent;
+              kw = "전체";
+              render();
+            }),
+        );
+      }
+      function renderFilters() {
+        const kws = [...new Set(filtered().flatMap((e) => e.keywords))]
+          .filter(Boolean)
+          .slice(0, 18);
+        filters.innerHTML =
+          `<button class="kw ${kw === "전체" ? "active" : ""}">전체 키워드</button>` +
+          kws
+            .map(
+              (x) =>
+                `<button class="kw ${x === kw ? "active" : ""}">${x}</button>`,
+            )
+            .join("");
+        filters.querySelectorAll(".kw").forEach(
+          (b) =>
+            (b.onclick = () => {
+              kw = b.textContent === "전체 키워드" ? "전체" : b.textContent;
+              render();
+            }),
+        );
+      }
+      function render() {
+        renderTabs();
+        renderFilters();
+        const arr = filtered();
+        count.textContent = `${arr.length} / ${DATA.length} RECORDS`;
+        list.innerHTML = arr.length
+          ? arr
+              .map(
+                (e, i) => `
+<article class="card ${selected.has(e.code) ? "selected" : ""}" data-code="${e.code}" style="animation-delay:${Math.min(i * 35, 350)}ms">
+<div class="chead"><input class="check" type="checkbox" ${selected.has(e.code) ? "checked" : ""} aria-label="${e.title} 선택">
+<div class="badge">${e.code}</div><div class="meta"><div class="ctitle" data-copy="title">${e.title}</div><div class="cat">${e.section} · ${e.cat || "기록"}</div></div>
+<button class="copyall">전체 복사</button></div>
+<div class="tags" data-copy="keywords">${e.keywords.map((k) => `<span class="tag">${k}</span>`).join("")}</div>
+<div class="body" data-copy="content">${e.content.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+<button class="toggle">${collapsed.has(e.code) ? "내용 펼치기" : "내용 접기"}</button>
+</article>`,
+              )
+              .join("")
+          : `<div class="empty">조건에 맞는 기록이 없습니다.</div>`;
+        bindCards();
+        syncSelect();
+      }
+      function bindCards() {
+        list.querySelectorAll(".card").forEach((card) => {
+          const e = DATA.find((x) => x.code === card.dataset.code);
+          const check = card.querySelector(".check");
+          check.onchange = () => {
+            check.checked ? selected.add(e.code) : selected.delete(e.code);
+            render();
+          };
+          card.querySelector('[data-copy="title"]').onclick = () =>
+            copyText(e.title, card.querySelector('[data-copy="title"]'));
+          card.querySelector('[data-copy="keywords"]').onclick = () =>
+            copyText(
+              e.keywords.join(", "),
+              card.querySelector('[data-copy="keywords"]'),
+              "키워드 복사 완료",
+            );
+          card.querySelector('[data-copy="content"]').onclick = () =>
+            copyText(e.content, card.querySelector('[data-copy="content"]'));
+          card.querySelector(".copyall").onclick = () => {
+            const area = [
+              card.querySelector('[data-copy="title"]'),
+              card.querySelector('[data-copy="keywords"]'),
+              card.querySelector('[data-copy="content"]'),
+            ];
+            fallbackCopy(
+              `제목: ${e.title}\n키워드: ${e.keywords.join(", ")}\n내용: ${e.content}`,
+            ).then(() => {
+              area.forEach((x, j) => setTimeout(() => fx(x), j * 220));
+              toastMsg("전체 복사 완료");
+            });
+          };
+          card.querySelector(".toggle").onclick = () => {
+            collapsed.has(e.code)
+              ? collapsed.delete(e.code)
+              : collapsed.add(e.code);
+            render();
+          };
+        });
+      }
+      function syncSelect() {
+        const arr = filtered();
+        const visible = arr.map((e) => e.code);
+        const all = visible.length > 0 && visible.every((c) => selected.has(c));
+        selectAll.checked = all;
+        selectAll.indeterminate = !all && visible.some((c) => selected.has(c));
+        batch.disabled = selected.size === 0;
+        batch.textContent = selected.size
+          ? `선택 항목 일괄 복사 (${selected.size})`
+          : "선택 항목 일괄 복사";
+      }
+      selectAll.onchange = () => {
+        filtered().forEach((e) =>
+          selectAll.checked ? selected.add(e.code) : selected.delete(e.code),
+        );
+        render();
+      };
+      batch.onclick = () => {
+        const arr = filtered().filter((e) => selected.has(e.code));
+        if (!arr.length) return;
+        const txt = arr
+          .map(
+            (e, i) =>
+              `[항목 ${i + 1}]\n제목: ${e.title}\n키워드: ${e.keywords.join(", ")}\n내용: ${e.content}`,
+          )
+          .join("\n\n");
+        fallbackCopy(txt).then(() => {
+          fx(batch);
+          toastMsg("선택 항목 복사 완료");
+        });
+      };
+      search.oninput = () => render();
+      $("enterBtn").onclick = () => {
+        splash.classList.add("hide");
+        app.classList.add("show");
+      };
+      $("mainBtn").onclick = () => {
+        cat = "전체";
+        kw = "전체";
+        search.value = "";
+        selected.clear();
+        collapsed.clear();
+        splash.classList.remove("hide");
+        app.classList.remove("show");
+        window.scrollTo(0, 0);
+        particles();
+      };
+      function particles() {
+        const p = $("particles");
+        p.innerHTML = "";
+        for (let i = 0; i < 22; i++) {
+          const x = document.createElement("i");
+          x.className = "p";
+          x.style.left = Math.random() * 100 + "%";
+          x.style.setProperty("--x", Math.random() * 80 - 40 + "px");
+          x.style.animationDuration = 8 + Math.random() * 13 + "s";
+          x.style.animationDelay = -Math.random() * 16 + "s";
+          p.appendChild(x);
+        }
+      }
+      particles();
+      render();
+    </script>
+  </body>
+</html>
